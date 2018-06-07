@@ -1,30 +1,19 @@
-# Base image on tomcat 7 with OpenJDK JRE 7
+# Base image on tomcat 8 with OpenJDK JRE 8
 FROM tomcat:8.5.31-jre8
 
 # Create pega directory for storing applications
 RUN mkdir -p /opt/pega
 
-# Expand prweb to target directory
-COPY ./prweb.war /opt/pega/prweb.war
-RUN unzip -q -d /opt/pega/prweb /opt/pega/prweb.war
-
-# Expand pr sys managment to target directory
-COPY ./prsysmgmt.war /opt/pega/prsysmgmt.war
-RUN unzip -q -d /opt/pega/prsysmgmt /opt/pega/prsysmgmt.war
-
-# Make jdbc driver available to tomcat applications
-COPY ./mssql-jdbc-6.4.0.jre8.jar /usr/local/tomcat/lib/
-
 # Setup global database variables
-ENV DB_USERNAME=pegaadmin \
-    DB_PASSWORD=admin#1234 \
-    DB_HOST=pegadevdb.database.windows.net \
-    DB_PORT=1433 \
-    DB_NAME=pegarbdb 
+ENV DB_USERNAME=pega \
+    DB_PASSWORD=pegasys \
+    DB_HOST=postgresql \
+    DB_PORT=5432 \
+    DB_NAME=pega
 
 # Provide variables for the JDBC connection string
-ENV JDBC_CLASS=com.microsoft.sqlserver.jdbc.SQLServerDriver \
-    JDBC_DB_TYPE=mssql \
+ENV JDBC_CLASS=org.postgresql.Driver \
+    JDBC_DB_TYPE=postgresql \
     JDBC_URL_PREFIX='//' \
     JDBC_URL_SUFFIX='' \
     JDBC_MIN_ACTIVE=50 \
@@ -36,8 +25,8 @@ ENV JDBC_CLASS=com.microsoft.sqlserver.jdbc.SQLServerDriver \
     JDBC_VALIDATION_QUERY='SELECT 1'
 
 # Provide variables for the name of the rules and data schema
-ENV RULES_SCHEMA=PegaRULES \
-    DATA_SCHEMA=PegaDATA
+ENV RULES_SCHEMA=pegarules \
+    DATA_SCHEMA=pegadata
 
 # Parameterize variables to customize the tomcat runtime
 ENV MAX_THREADS=300 \
