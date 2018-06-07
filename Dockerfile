@@ -1,37 +1,37 @@
 # Base image on tomcat 7 with OpenJDK JRE 7
-FROM tomcat:7-jre7
+FROM tomcat:8.5.31-jre8
 
 # Create pega directory for storing applications
 RUN mkdir -p /opt/pega
 
 # Setup global database variables
-ENV DB_USERNAME=pega \
-    DB_PASSWORD=pegasys \
-    DB_HOST=postgresql \
-    DB_PORT=5432 \
-    DB_NAME=pega
+ENV DB_USERNAME=pegaadmin
+    DB_PASSWORD=admin#1234
+    DB_HOST=pegadevdb.database.windows.net
+    DB_PORT=1433
+    DB_NAME=pegarbdb
 
 # Provide variables for the JDBC connection string
-ENV JDBC_CLASS=org.postgresql.Driver \
-    JDBC_DB_TYPE=postgresql \
-    JDBC_URL_PREFIX='//' \
-    JDBC_URL_SUFFIX='' \
-    JDBC_MIN_ACTIVE=50 \
-    JDBC_MAX_ACTIVE=250 \
-    JDBC_MIN_IDLE=10 \
-    JDBC_MAX_IDLE=50 \
-    JDBC_MAX_WAIT=30000 \
-    JDBC_INITIAL_SIZE=50 \
+ENV JDBC_CLASS=com.microsoft.sqlserver.jdbc.SQLServerDriver
+    JDBC_DB_TYPE=mssql
+    JDBC_URL_PREFIX='//'
+    JDBC_URL_SUFFIX=''
+    JDBC_MIN_ACTIVE=50
+    JDBC_MAX_ACTIVE=250
+    JDBC_MIN_IDLE=10
+    JDBC_MAX_IDLE=50
+    JDBC_MAX_WAIT=30000
+    JDBC_INITIAL_SIZE=50
     JDBC_VALIDATION_QUERY='SELECT 1'
 
 # Provide variables for the name of the rules and data schema
-ENV RULES_SCHEMA=pegarules \
-    DATA_SCHEMA=pegadata
+ENV RULES_SCHEMA=PegaRULES
+    DATA_SCHEMA=PegaDATA
 
 # Parameterize variables to customize the tomcat runtime
-ENV MAX_THREADS=300 \
-    INDEX_DIRECTORY=NONE \
-    HEAP_DUMP_PATH=/heapdumps \
+ENV MAX_THREADS=300
+    INDEX_DIRECTORY=NONE
+    HEAP_DUMP_PATH=/heapdumps
     NODE_ID=NONE
 ENV JAVA_OPTS -Xms2048m -Xmx4096m -XX:PermSize=64m -XX:MaxPermSize=384m
 
