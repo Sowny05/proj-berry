@@ -12,25 +12,25 @@ ENV DB_USERNAME=pegaadmin \
     DB_NAME=pegarbdb \
 
 # Provide variables for the JDBC connection string
-ENV JDBC_CLASS=com.microsoft.sqlserver.jdbc.SQLServerDriver
-    JDBC_DB_TYPE=mssql
-    JDBC_URL_PREFIX='//'
-    JDBC_URL_SUFFIX=''
-    JDBC_MIN_ACTIVE=50
-    JDBC_MAX_ACTIVE=250
-    JDBC_MIN_IDLE=10
-    JDBC_MAX_IDLE=50
-    JDBC_MAX_WAIT=30000
-    JDBC_INITIAL_SIZE=50
+ENV JDBC_CLASS=com.microsoft.sqlserver.jdbc.SQLServerDriver \
+    JDBC_DB_TYPE=mssql \
+    JDBC_URL_PREFIX='//' \
+    JDBC_URL_SUFFIX='' \
+    JDBC_MIN_ACTIVE=50 \
+    JDBC_MAX_ACTIVE=250 \
+    JDBC_MIN_IDLE=10 \
+    JDBC_MAX_IDLE=50 \
+    JDBC_MAX_WAIT=30000 \
+    JDBC_INITIAL_SIZE=50 \
     JDBC_VALIDATION_QUERY='SELECT 1'
 
 # Provide variables for the name of the rules and data schema
-ENV RULES_SCHEMA=PegaRULES
+ENV RULES_SCHEMA=PegaRULES \
     DATA_SCHEMA=PegaDATA
 
 # Parameterize variables to customize the tomcat runtime
-ENV MAX_THREADS=300
-    INDEX_DIRECTORY=NONE
+ENV MAX_THREADS=300 \
+    INDEX_DIRECTORY=NONE \
     HEAP_DUMP_PATH=/heapdumps
     NODE_ID=NONE
 ENV JAVA_OPTS -Xms2048m -Xmx4096m -XX:PermSize=64m -XX:MaxPermSize=384m
