@@ -5,11 +5,11 @@ FROM tomcat:8.5.31-jre8
 RUN mkdir -p /opt/pega
 
 # Setup global database variables
-ENV DB_USERNAME=pegaadmin
-    DB_PASSWORD=admin#1234
-    DB_HOST=pegadevdb.database.windows.net
-    DB_PORT=1433
-    DB_NAME=pegarbdb
+ENV DB_USERNAME=pegaadmin \
+    DB_PASSWORD=admin#1234 \
+    DB_HOST=pegadevdb.database.windows.net \
+    DB_PORT=1433 \
+    DB_NAME=pegarbdb \
 
 # Provide variables for the JDBC connection string
 ENV JDBC_CLASS=com.microsoft.sqlserver.jdbc.SQLServerDriver
