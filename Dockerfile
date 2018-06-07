@@ -4,6 +4,17 @@ FROM tomcat:8.5.31-jre8
 # Create pega directory for storing applications
 RUN mkdir -p /opt/pega
 
+# Expand prweb to target directory
+COPY ./prweb.war /opt/pega/prweb.war
+RUN unzip -q -d /opt/pega/prweb /opt/pega/prweb.war
+
+# Expand pr sys managment to target directory
+COPY ./prsysmgmt.war /opt/pega/prsysmgmt.war
+RUN unzip -q -d /opt/pega/prsysmgmt /opt/pega/prsysmgmt.war
+
+# Make jdbc driver available to tomcat applications
+COPY ./mssql-jdbc-6.4.0.jre8.jar /usr/local/tomcat/lib/
+
 # Setup global database variables
 ENV DB_USERNAME=pegaadmin \
     DB_PASSWORD=admin#1234 \
