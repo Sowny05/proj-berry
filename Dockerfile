@@ -9,7 +9,7 @@ ENV DB_USERNAME=pegaadmin \
     DB_PASSWORD=admin#1234 \
     DB_HOST=pegadevdb.database.windows.net \
     DB_PORT=1433 \
-    DB_NAME=pegarbdb \
+    DB_NAME=pegarbdb 
 
 # Provide variables for the JDBC connection string
 ENV JDBC_CLASS=com.microsoft.sqlserver.jdbc.SQLServerDriver \
@@ -31,7 +31,7 @@ ENV RULES_SCHEMA=PegaRULES \
 # Parameterize variables to customize the tomcat runtime
 ENV MAX_THREADS=300 \
     INDEX_DIRECTORY=NONE \
-    HEAP_DUMP_PATH=/heapdumps
+    HEAP_DUMP_PATH=/heapdumps \
     NODE_ID=NONE
 ENV JAVA_OPTS -Xms2048m -Xmx4096m -XX:PermSize=64m -XX:MaxPermSize=384m
 
